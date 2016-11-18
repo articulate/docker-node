@@ -1,7 +1,7 @@
 FROM node:6
 COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
-RUN npm install -g yarn
+RUN npm install -g yarn@0.17.4
 ENV PATH="${PATH}:${HOME}/.yarn/bin"
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
