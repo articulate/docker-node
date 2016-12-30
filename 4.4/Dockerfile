@@ -1,5 +1,4 @@
 FROM node:4.4
-COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 RUN npm install -g yarn@0.17.4
 ENV PATH="${PATH}:${HOME}/.yarn/bin"
