@@ -25,4 +25,7 @@ RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
 RUN groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
 WORKDIR $SERVICE_ROOT
 
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
+RUN chmod a+x /wait-for-it.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
