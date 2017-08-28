@@ -1,8 +1,11 @@
 FROM node:7
+ARG NPM_TOKEN=secret
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV YARN_VERSION 0.27.5
+
+ADD https://raw.githubusercontent.com/articulate/docker-articulate-node/master/.npmrc ${SERVICE_ROOT}/.npmrc
 
 RUN set -ex \
   && for key in \
