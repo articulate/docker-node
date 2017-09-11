@@ -2,7 +2,7 @@ FROM node:5.11
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
-ENV YARN_VERSION 0.27.5
+ENV YARN_VERSION 1.0.1 
 
 RUN set -ex \
   && for key in \
