@@ -2,7 +2,7 @@ FROM node:6-stretch
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
-ENV YARN_VERSION 0.27.5
+ENV YARN_VERSION 1.3.2
 
 RUN apt-get update -qq && \
   apt-get upgrade -y && \
