@@ -1,12 +1,8 @@
-FROM node:6.2-stretch
+FROM node:6.0
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
-ENV YARN_VERSION 0.27.5
-
-RUN apt-get update -qq && \
-  apt-get upgrade -y && \
-  rm -rf /var/lib/apt/lists/*
+ENV YARN_VERSION 0.22.0
 
 RUN set -ex \
   && for key in \
