@@ -1,4 +1,4 @@
-FROM node:7-stretch
+FROM node:7
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
