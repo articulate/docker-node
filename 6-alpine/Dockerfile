@@ -3,7 +3,7 @@ FROM node:6-alpine
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 
-RUN apk update && apk add bash
+RUN apk update && apk add bash make gcc
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
