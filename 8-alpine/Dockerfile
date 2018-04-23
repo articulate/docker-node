@@ -26,7 +26,6 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
-RUN npm install --global yarn
 
 RUN addgroup $SERVICE_USER && adduser -h $SERVICE_ROOT -G $SERVICE_USER -s /bin/bash $SERVICE_USER -D
 WORKDIR $SERVICE_ROOT
