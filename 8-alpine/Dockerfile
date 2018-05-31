@@ -4,9 +4,7 @@ ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV YARN_VERSION 1.6.0
 
-RUN apk update && apk add bash make gcc g++
-
-RUN apk update && apk upgrade binutils
+RUN apk update && apk add bash make gcc g++ binutils
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
