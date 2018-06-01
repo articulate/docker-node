@@ -11,7 +11,7 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - && \
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
     yum install -y yarn-$YARN_VERSION
 
-RUN yarn global add \
+RUN npm i -g \
       aws-sdk@2.221.1 \
       node-gyp \
       nodemon
@@ -26,5 +26,5 @@ WORKDIR $SERVICE_ROOT
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod a+rx /wait-for-it.sh
 
-## TODO: need to `yarn link aws-sdk` in an entrypoint file (post build)
+## TODO: need to `npm link aws-sdk` in an entrypoint file (post build)
 ENTRYPOINT ["/entrypoint.sh"]
