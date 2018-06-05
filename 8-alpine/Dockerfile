@@ -6,7 +6,7 @@ ENV YARN_VERSION 1.6.0
 
 RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip 
 
-RUN apk apk upgrade --no-cache binutils jq sudo unzip 
+RUN apk upgrade --no-cache binutils jq sudo unzip 
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
