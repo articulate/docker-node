@@ -1,5 +1,7 @@
 FROM node:8-stretch
 
+RUN npm uninstall npm -g
+
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV YARN_VERSION 1.6.0
