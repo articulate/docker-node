@@ -1,7 +1,5 @@
 FROM node:6-stretch
 
-RUN npm uninstall npm -g
-
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 
@@ -18,6 +16,7 @@ WORKDIR $SERVICE_ROOT
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod a+rx /wait-for-it.sh
 
+RUN npm install npm -g
 RUN yarn global add node-gyp
 
 ENTRYPOINT ["/entrypoint.sh"]
