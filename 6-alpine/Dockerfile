@@ -2,10 +2,9 @@ FROM node:6-alpine
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
+ENV NPM_VER 6.1.0
 
-RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip 
-
-RUN apk upgrade --no-cache binutils jq sudo unzip
+RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
@@ -16,7 +15,12 @@ WORKDIR $SERVICE_ROOT
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod a+rx /wait-for-it.sh
 
-RUN npm install npm -g
+RUN npm uninstall npm -g
+
+RUN wget https://registry.npmjs.org/npm/-/npm-${NPM_VER}.tgz \
+  && tar xzf npm-${NPM_VER}.tgz \
+  && ./package/scripts/install.sh
+
 RUN yarn global add node-gyp
 
 ENTRYPOINT ["/entrypoint.sh"]
