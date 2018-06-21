@@ -3,9 +3,21 @@ FROM node:8-alpine
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 
-RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip 
+RUN apk add --no-cache \
+  bash \
+  make \
+  gcc \
+  g++ \
+  binutils \
+  jq \
+  sudo \
+  unzip
 
-RUN apk upgrade --no-cache binutils jq sudo unzip
+RUN apk upgrade --no-cache \
+  binutils \
+  jq \
+  sudo \
+  unzip
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
