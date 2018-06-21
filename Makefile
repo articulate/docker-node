@@ -1,8 +1,8 @@
-default: build_6 build_6-alpine build_8 build_8-alpine
+default: ubuntu alpine
 
 ubuntu: build_6 build_8
 
-alpine: build_6-alpine build_8-alpine
+alpine: build_6-alpine build_8-alpine build_8-alpine-frontend
 
 build_6:
 	docker build -t local/articulate-node:6 6/
@@ -15,3 +15,6 @@ build_8:
 
 build_8-alpine:
 	docker build -t local/articulate-node:8-alpine 8-alpine/
+
+build_8-alpine-frontend:
+	docker build -t local/articulate-node:8-alpine-frontend 8-alpine-frontend/
