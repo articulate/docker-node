@@ -1,4 +1,4 @@
-default: build_6 build_8
+default: build_6 build_6-alpine build_8 build_8-alpine build_10-alpine
 
 build_6:
 	docker build -t local/articulate-node:6 6/
