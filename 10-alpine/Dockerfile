@@ -2,7 +2,6 @@ FROM node:10-alpine
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
-ENV NODE_MODULES_DIR /node_modules
 
 RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip
 
@@ -18,6 +17,10 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN chmod a+rx /wait-for-it.sh
 
 ENV YARN_VERSION 1.10.1
+
+ENV NODE_MODULES_DIR /node_modules
+RUN mkdir $NODE_MODULES_DIR
+RUN chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_DIR
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
