@@ -1,8 +1,10 @@
 FROM lambci/lambda:build-nodejs8.10
 
+ENV AWS_DEFAULT_REGION us-east-1
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
-ENV YARN_VERSION 1.6.0
+ENV SHELL bash
+ENV YARN_VERSION 1.10.1
 
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
@@ -11,7 +13,7 @@ RUN yum install -y \
   yarn-$YARN_VERSION
 
 RUN npm i -g \
-      aws-sdk@2.221.1 \
+      aws-sdk \
       node-gyp
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
