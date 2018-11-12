@@ -4,6 +4,8 @@ ENV AWS_DEFAULT_REGION us-east-1
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV SHELL bash
+
+ENV AWS_SDK_VERSION 2.290.0
 ENV YARN_VERSION 1.10.1
 
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
@@ -13,8 +15,8 @@ RUN yum install -y \
   yarn-$YARN_VERSION
 
 RUN npm i -g \
-      aws-sdk \
-      node-gyp
+  aws-sdk@$AWS_SDK_VERSION \
+  node-gyp
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
