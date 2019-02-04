@@ -2,9 +2,10 @@
 # Source for this base image can be found at https://github.com/nodejs/docker-node/tree/master/8/stretch-slim
 FROM node:8-stretch-slim
 
-# Run apt-get, very quiet (-qq) and saying yes to prompts (-y)
-# Also see best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
-RUN apt-get update -qq && apt-get upgrade -y
+# Run apt-get, be vewwy quiet (-qq) and say yes to prompts (-y)
+# See best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+# We also install the things we need across the organisation, and which we want to 'manage' centrally.
+RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential imagemagick
 
 # Install consul-template, which we'll use to pull in our environment variables
 # If you want to know more on this, see the Platform 101 course, section "Consul and Vault"
