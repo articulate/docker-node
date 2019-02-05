@@ -35,6 +35,9 @@ RUN npm install npm -g
 # https://github.com/nodejs/node-gyp
 RUN yarn global add node-gyp
 
+# Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
+COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
+
 # Our entrypoint will pull in our environment variables from Consul and Vault, and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
