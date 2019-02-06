@@ -2,6 +2,7 @@
 # Source for this base image can be found at https://github.com/nodejs/docker-node/tree/master/8/stretch-slim
 FROM node:8-stretch-slim
 
+
 # Run apt-get, be vewwy quiet (-qq) and say yes to prompts (-y)
 # See best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 # We also install the things we need across the organisation, and which we want to 'manage' centrally.
@@ -12,9 +13,11 @@ RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essenti
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
 
-# Create our group and user
+# We use the following variables both in here and in downstream Dockerfiles
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
+
+# Create our service group and user, and set the directory where we'll work from going forward
 RUN groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
 WORKDIR $SERVICE_ROOT
 
