@@ -31,6 +31,7 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN chmod a+rx /wait-for-it.sh
 
 # Install the latest version of npm (which apparently the node base image doesn't necessarily provide)
+# At the time of writing this gives us npm 6.7.0. It won't change much since Node 8 is LTS.
 RUN npm install npm -g
 
 # Make node-gyp globally available (used for compiling native modules for Node.js)
