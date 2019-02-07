@@ -1,7 +1,6 @@
-# Debian-based image maintained by by Node, see https://hub.docker.com/_/node/ for a full list of available images.
+# Debian-based image maintained by Node, see https://hub.docker.com/_/node/ for a full list of available images.
 # Source for this base image can be found at https://github.com/nodejs/docker-node/tree/master/8/stretch-slim
 FROM node:8-stretch-slim
-
 
 # Run apt-get, be vewwy quiet (-qq) and say yes to prompts (-y)
 # See best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
