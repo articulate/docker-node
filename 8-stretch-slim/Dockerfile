@@ -2,10 +2,16 @@
 # Source for this base image can be found at https://github.com/nodejs/docker-node/tree/master/8/stretch-slim
 FROM node:8-stretch-slim
 
-# Run apt-get, be vewwy quiet (-qq) and say yes to prompts (-y)
+# Let's update and install the things.
+# Run apt-get quietly (-qq) and say yes to prompts (-y)
 # See best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
-# We also install the things we need across the organisation, and which we want to 'manage' centrally.
-RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential imagemagick
+# Note: we install Imagemagick in our base image so we can keep it updated in one place, and so we can add a strict security policy by default (see further down)
+RUN apt-get update -qq \
+    && apt-get upgrade -y \
+    && apt-get install -y build-essential imagemagick
+
+# Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
+COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # Install consul-template, which we'll use to pull in our environment variables
 # If you want to know more on this, see the Platform 101 course, section "Consul and Vault"
@@ -31,15 +37,12 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN chmod a+rx /wait-for-it.sh
 
 # Install the latest version of npm (which apparently the node base image doesn't necessarily provide)
-# At the time of writing this gives us npm 6.7.0. It won't change much since Node 8 is LTS.
+# At the time of writing this gives us npm 6.7.0. It won't change much since Node 8 is LTS. (EOL in December 2019)
 RUN npm install npm -g
 
 # Make node-gyp globally available (used for compiling native modules for Node.js)
 # https://github.com/nodejs/node-gyp
 RUN yarn global add node-gyp
-
-# Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
-COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # Our entrypoint will pull in our environment variables from Consul and Vault, and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
