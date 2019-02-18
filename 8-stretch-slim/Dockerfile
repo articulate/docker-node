@@ -8,7 +8,10 @@ FROM node:8-stretch-slim
 # Note: we install Imagemagick in our base image so we can keep it updated in one place, and so we can add a strict security policy by default (see further down)
 RUN apt-get update -qq \
     && apt-get upgrade -y \
-    && apt-get install -y build-essential imagemagick
+    && apt-get install -y build-essential imagemagick \
+    && apt-get upgrade -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
 COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
