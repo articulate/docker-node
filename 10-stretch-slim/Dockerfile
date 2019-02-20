@@ -1,6 +1,6 @@
 # Debian-based image maintained by Node, see https://hub.docker.com/_/node/ for a full list of available images.
 # Source for this base image can be found at https://github.com/nodejs/docker-node/tree/master/10/stretch-slim
-FROM node:10.5.1-stretch-slim
+FROM node:10-stretch-slim
 
 # Let's update and install the things.
 # Run apt-get quietly (-qq) and say yes to prompts (-y)
