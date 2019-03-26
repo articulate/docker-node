@@ -18,8 +18,7 @@
   - use 'identify' on various image types to see if Imagemagick allows/blocks what you want it to
   (Tip: use wget to pull in various files in your local container to test them out)
 
-  Note: most Imagemagick documentation shows a security policy with an aggregate pattern, like:
-  "<policy domain="coder" rights="read|write" pattern="{GIF,JPEG,PNG,WEBP}" />"
+  Note: most Imagemagick documentation shows a security policy with an aggregate pattern, like {GIF,JPEG,PNG,WEBP}
   However, that only works from Imagemagick 6.9.7-9 upwards, and Debian 9 gives us only 6.9.7-4 at this time.
   So here we have to specify them on seperate lines.
 -->
