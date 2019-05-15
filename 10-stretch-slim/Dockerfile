@@ -40,16 +40,12 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN chmod a+rx /wait-for-it.sh
 
 # Install the latest version of npm (which apparently the node base image doesn't necessarily provide)
+# At the time of writing this gives us npm 6.7.0. It won't change much since Node 8 is LTS. (EOL in December 2019)
 RUN npm install npm -g
 
-# Install node-gyp globally (used for compiling native modules for Node.js)
+# Make node-gyp globally available (used for compiling native modules for Node.js)
 # https://github.com/nodejs/node-gyp
 RUN yarn global add node-gyp
-
-# Remove the default node-gyp installed by npm, now that we explicitly installed node-gyp in the previous step.
-# Npm comes with node-gyp 3.8.0 at this time, which pulls in a vulnerable tar version (2.2.1): https://www.npmjs.com/advisories/803.
-# This step can be removed once npm starts shipping node-gyp 4.0.0 as default.
-RUN rm -rf /usr/local/lib/node_modules/npm/node_modules/node-gyp/
 
 # Our entrypoint will pull in our environment variables from Consul and Vault, and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
