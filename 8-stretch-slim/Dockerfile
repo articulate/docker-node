@@ -52,6 +52,8 @@ RUN yarn global add node-gyp
 RUN mkdir -p $NODE_MODULES_PATH && \
     chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH
 
+ENV PATH $PATH:$NODE_MODULES_PATH/.bin
+
 # Our entrypoint will pull in our environment variables from Consul and Vault, and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
