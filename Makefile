@@ -1,5 +1,11 @@
 default: build_6 build_8
 
+alpine: build_6-alpine build_8-alpine build_10-alpine
+
+lambda: build_8-lambda
+
+stretch-slim: build_8-stretch-slim build_10-stretch-slim
+
 build_6:
 	docker build -t local/articulate-node:6 6/
 
@@ -15,5 +21,11 @@ build_8-alpine:
 build_8-lambda:
 	docker build -t local/articulate-node:8-lambda 8-lambda/
 
+build_8-stretch-slim:
+	docker build -t local/articulate-node:8-stretch-slim 8-stretch-slim/
+
 build_10-alpine:
 	docker build -t local/articulate-node:10-alpine 10-alpine/
+
+build_10-stretch-slim:
+	docker build -t local/articulate-node:10-stretch-slim 10-stretch-slim/
