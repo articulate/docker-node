@@ -24,6 +24,7 @@ RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
 # We use the following variables both in here and in downstream Dockerfiles
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
+ENV NODE_MODULES_PATH /node_modules
 
 # Create our service group and user, and set the directory where we'll work from going forward
 RUN groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
@@ -46,6 +47,12 @@ RUN npm install npm -g
 # Make node-gyp globally available (used for compiling native modules for Node.js)
 # https://github.com/nodejs/node-gyp
 RUN yarn global add node-gyp
+
+# Create the node_modules directory, make it owned by service user
+RUN mkdir -p $NODE_MODULES_PATH && \
+    chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH
+
+ENV PATH $PATH:$NODE_MODULES_PATH/.bin
 
 # Our entrypoint will pull in our environment variables from Consul and Vault, and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
