@@ -3,7 +3,8 @@ FROM node:8-alpine
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 
-RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip 
+# Note: we install python 2 because node-gyp v5 does not support python 3, & we want child images to continue to be able to build native addons
+RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip python2
 
 RUN apk upgrade --no-cache binutils jq sudo unzip
 
