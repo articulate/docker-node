@@ -10,13 +10,10 @@ ENV YARN_VERSION 1.10.1
 
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
-RUN yum install -y \
-  libtasn \
-  yarn-$YARN_VERSION
-
 RUN npm i -g \
   aws-sdk@$AWS_SDK_VERSION \
-  node-gyp
+  node-gyp \
+  yarn@$YARN_VERSION
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
