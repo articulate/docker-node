@@ -8,8 +8,6 @@ ENV SHELL bash
 ENV AWS_SDK_VERSION 2.290.0
 ENV YARN_VERSION 1.10.1
 
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-
 RUN npm i -g \
   aws-sdk@$AWS_SDK_VERSION \
   node-gyp \
