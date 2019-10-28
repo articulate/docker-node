@@ -4,8 +4,7 @@ ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV NPM_VER 6.1.0
 
-# Note: we install python 2 because node-gyp v5 does not support python 3, & we want child images to continue to be able to build native addons
-RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip tar curl python2
+RUN apk add --no-cache bash make gcc g++ binutils jq sudo unzip tar curl
 
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
