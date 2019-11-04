@@ -6,10 +6,9 @@ FROM node:12-stretch-slim
 # Run apt-get quietly (-qq) and say yes to prompts (-y)
 # See best practices for apt-get in Docker at https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 # Note: we install Imagemagick in our base image so we can keep it updated in one place, and so we can add a strict security policy by default (see further down)
-# Note: we install python 2 because node-gyp v5 does not support python 3, & we want child images to continue to be able to build native addons
 RUN apt-get update -qq \
     && apt-get upgrade -y \
-    && apt-get install -y build-essential imagemagick python2.7 \
+    && apt-get install -y build-essential imagemagick \
     && apt-get upgrade -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -26,7 +25,6 @@ RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
 ENV NODE_MODULES_PATH /node_modules
-ENV PYTHON /usr/bin/python2.7
 
 # Create our service group and user, and set the directory where we'll work from going forward
 RUN groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
