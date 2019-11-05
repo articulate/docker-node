@@ -27,6 +27,9 @@ build_8-stretch-slim:
 build_10-alpine:
 	docker build -t local/articulate-node:10-alpine 10-alpine/
 
+build_10-lambda:
+	docker build -t local/articulate-node:10-lambda 10-lambda/
+
 build_10-stretch-slim:
 	docker build -t local/articulate-node:10-stretch-slim 10-stretch-slim/
 
