@@ -2,7 +2,7 @@ default: build_6 build_8
 
 alpine: build_6-alpine build_8-alpine build_10-alpine
 
-lambda: build_8-lambda
+lambda: build_8-lambda build_10-lambda
 
 stretch-slim: build_8-stretch-slim build_10-stretch-slim build_12-stretch-slim
 
