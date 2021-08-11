@@ -16,7 +16,7 @@ RUN npm i -g \
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 RUN bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh
 
-RUN yum -y install shadow-utils && yum clean all
+RUN yum -y install shadow-utils make && yum clean all
 RUN /usr/sbin/groupadd $SERVICE_USER && /usr/sbin/useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
 WORKDIR $SERVICE_ROOT
 
