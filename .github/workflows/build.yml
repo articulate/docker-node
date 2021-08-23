@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule: # Run everyday
+    - cron: "0 0 * * *"
 
 jobs:
   build:
