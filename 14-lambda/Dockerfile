@@ -12,7 +12,7 @@ COPY entrypoint-lambda.sh /
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 
-RUN yum -y install shadow-utils make && yum clean all \
+RUN yum -y install shadow-utils make zip && yum clean all \
     && npm i -g \
         aws-sdk@$AWS_SDK_VERSION \
         node-gyp \
