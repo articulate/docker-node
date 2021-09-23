@@ -20,6 +20,7 @@ jobs:
           - "10-stretch-slim"
           - "12-stretch-slim"
           - "14-stretch-slim"
+          - "12-buster-slim"
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
