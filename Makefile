@@ -1,4 +1,4 @@
-all: lambda stretch-slim
+all: lambda stretch-slim buster-slim
 
 lambda: build_10-lambda build_12-lambda build_14-lambda
 
