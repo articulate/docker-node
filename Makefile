@@ -4,7 +4,9 @@ lambda: build_10-lambda build_12-lambda build_14-lambda
 
 stretch-slim: build_10-stretch-slim build_12-stretch-slim build_14-stretch-slim
 
-.PHONY: all lambda stretch-slim
+buster-slim: build_12-buster-slim
+
+.PHONY: all lambda stretch-slim buster-slim
 
 10-lambda:
 	docker build -t local/articulate-node:10-lambda 10-lambda
