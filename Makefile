@@ -29,3 +29,7 @@ stretch-slim: build_10-stretch-slim build_12-stretch-slim build_14-stretch-slim
 14-stretch-slim:
 	docker build -t local/articulate-node:14-stretch-slim 14-stretch-slim
 .PHONY: 14-stretch-slim
+
+12-buster-slim:
+	docker build -t local/articulate-node:12-buster-slim 12-buster-slim
+.PHONY: 12-buster-slim
