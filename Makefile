@@ -1,10 +1,12 @@
-all: lambda stretch-slim
+all: lambda stretch-slim buster-slim
 
 lambda: build_10-lambda build_12-lambda build_14-lambda
 
 stretch-slim: build_10-stretch-slim build_12-stretch-slim build_14-stretch-slim
 
-.PHONY: all lambda stretch-slim
+buster-slim: build_12-buster-slim build_14-buster-slim
+
+.PHONY: all lambda stretch-slim buster-slim
 
 10-lambda:
 	docker build -t local/articulate-node:10-lambda 10-lambda
@@ -29,3 +31,11 @@ stretch-slim: build_10-stretch-slim build_12-stretch-slim build_14-stretch-slim
 14-stretch-slim:
 	docker build -t local/articulate-node:14-stretch-slim 14-stretch-slim
 .PHONY: 14-stretch-slim
+
+12-buster-slim:
+	docker build -t local/articulate-node:12-buster-slim 12-buster-slim
+.PHONY: 12-buster-slim
+
+14-buster-slim:
+	docker build -t local/articulate-node:14-buster-slim 14-buster-slim
+.PHONY: 14-buster-slim
