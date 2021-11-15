@@ -12,7 +12,7 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN apt-get update -qq \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            build-essential imagemagick \
+            build-essential python imagemagick \
         && apt-get upgrade -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
@@ -21,10 +21,8 @@ RUN apt-get update -qq \
     # Create our own user and remove the node user
     && groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER \
     && userdel -r node \
-    # Install the latest version of npm
-    && npm install -g npm \
-    # Make node-gyp globally available (used for compiling native modules for Node.js)
-    && yarn global add node-gyp \
+    # Install the latest version of npm that has a node-gyp which works with Python 2.7
+    && npm install -g npm@7 \
     # Create the node_modules directory, make it owned by service user
     && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH
 

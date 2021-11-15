@@ -6,21 +6,20 @@ ENV SERVICE_USER service
 ENV SHELL bash
 
 ENV AWS_SDK_VERSION 2.585.0
-ENV YARN_VERSION 1.19.2
+ENV YARN_VERSION 1.22.15
 
 COPY entrypoint-lambda.sh /
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 
-RUN npm i -g \
+RUN npm install -g \
         aws-sdk@$AWS_SDK_VERSION \
-        node-gyp \
+        npm@7 \
         yarn@$YARN_VERSION \
     && bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh \
     && chmod a+rx /wait-for-it.sh \
     && groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER
 
 WORKDIR $SERVICE_ROOT
-
 
 ENTRYPOINT ["/entrypoint-lambda.sh"]
