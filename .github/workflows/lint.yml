@@ -10,16 +10,14 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - "10-lambda"
-          - "12-lambda"
-          - "14-lambda"
-          - "10-stretch-slim"
-          - "12-stretch-slim"
-          - "14-stretch-slim"
-          - "16-stretch-slim"
-          - "12-buster-slim"
-          - "14-buster-slim"
-          - "16-buster-slim"
+          - 12-lambda
+          - 12-stretch-slim
+          - 12-buster-slim
+          - 14-lambda
+          - 14-stretch-slim
+          - 14-buster-slim
+          - 16-stretch-slim
+          - 16-buster-slim
     steps:
       - uses: actions/checkout@v2
       - uses: hadolint/hadolint-action@v1.6.0
