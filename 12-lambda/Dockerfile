@@ -12,9 +12,9 @@ COPY entrypoint-lambda.sh /
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 
-RUN npm install -g \
+RUN npm install -g npm@7 \
+    && npm install -g \
         aws-sdk@$AWS_SDK_VERSION \
-        npm@7 \
         yarn@$YARN_VERSION \
     && bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh \
     && chmod a+rx /wait-for-it.sh \
