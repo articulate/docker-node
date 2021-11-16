@@ -13,9 +13,9 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 
 RUN yum -y install shadow-utils make zip && yum clean all \
+    && npm install -g node@7 \
     && npm install -g \
         aws-sdk@$AWS_SDK_VERSION \
-        node@7 \
         yarn@$YARN_VERSION \
     && bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh \
     && chmod a+rx /wait-for-it.sh \
