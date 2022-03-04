@@ -39,3 +39,7 @@ buster-slim: 12-buster-slim 14-buster-slim 16-buster-slim
 16-buster-slim:
 	docker build -t local/articulate-node:16-buster-slim 16-buster-slim
 .PHONY: 16-buster-slim
+
+16-bullseye-slim:
+	docker build -t local/articulate-node:16-bullseye-slim 16-bullseye-slim
+.PHONY: 16-bullseye-slim
