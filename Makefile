@@ -1,10 +1,12 @@
-all: lambda stretch-slim buster-slim
+all: lambda stretch-slim buster-slim bullseye-slim
 
 lambda: 12-lambda 14-lambda
 
 stretch-slim: 12-stretch-slim 14-stretch-slim 16-stretch-slim
 
 buster-slim: 12-buster-slim 14-buster-slim 16-buster-slim
+
+bullseye-slim: 16-bullseye-slim
 
 .PHONY: all lambda stretch-slim buster-slim
 
