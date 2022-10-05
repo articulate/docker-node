@@ -4,7 +4,7 @@ lambda: 12-lambda 14-lambda
 
 stretch-slim: 12-stretch-slim 14-stretch-slim 16-stretch-slim
 
-buster-slim: 12-buster-slim 14-buster-slim 16-buster-slim 18-buster-slim
+buster-slim: 12-buster-slim 14-buster-slim 16-buster-slim
 
 bullseye-slim: 16-bullseye-slim 18-bullseye-slim
 
@@ -41,10 +41,6 @@ bullseye-slim: 16-bullseye-slim 18-bullseye-slim
 16-buster-slim:
 	docker build -t local/articulate-node:16-buster-slim 16-buster-slim
 .PHONY: 16-buster-slim
-
-18-buster-slim:
-	docker build -t local/articulate-node:18-buster-slim 18-buster-slim
-.PHONY: 18-buster-slim
 
 16-bullseye-slim:
 	docker build -t local/articulate-node:16-bullseye-slim 16-bullseye-slim
