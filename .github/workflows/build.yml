@@ -20,6 +20,7 @@ jobs:
           - 14-lambda
           - 14-stretch-slim
           - 14-buster-slim
+          - 16-lambda
           - 16-stretch-slim
           - 16-buster-slim
           - 16-bullseye-slim
