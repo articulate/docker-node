@@ -23,7 +23,7 @@ jobs:
           - 18-bullseye-slim
     steps:
       - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@0a6d062e780d218ea909a18365e0ab2e36d09612 # pin@v2.0.0
+      - uses: hadolint/hadolint-action@f988afea3da57ee48710a9795b6bb677cc901183 # pin@v2.1.0
         with:
           dockerfile: ${{ matrix.image }}/Dockerfile
           ignore: DL3008,DL3016,DL3033
