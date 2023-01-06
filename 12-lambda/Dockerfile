@@ -8,7 +8,7 @@ ENV SHELL bash
 ENV AWS_SDK_VERSION 2.585.0
 ENV YARN_VERSION 1.22.15
 
-COPY entrypoint-lambda.sh /
+COPY scripts/entrypoint-lambda.sh /
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
 ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
 

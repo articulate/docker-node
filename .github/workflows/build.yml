@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: docker/build-push-action@v3
         with:
-          context: ${{ matrix.image }}
+          file: ${{ matrix.image }}/Dockerfile
           push: true
           tags: articulate/articulate-node:${{ matrix.image }}
           platforms: linux/amd64,linux/arm64/v8

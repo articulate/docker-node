@@ -27,7 +27,10 @@ RUN apt-get update -qq \
     && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH
 
 # Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
-COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
+COPY policies/imagemagick-policy-6.xml /etc/ImageMagick-6/policy.xml
+
+# Add custom retry script
+COPY scripts/retry /usr/local/bin
 
 WORKDIR $SERVICE_ROOT
 

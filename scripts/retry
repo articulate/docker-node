@@ -1,0 +1,15 @@
+#!/bin/bash
+
+MAX_RETRIES=$((${RETRIES:-3}))
+
+for i in $(seq 1 $MAX_RETRIES); do
+  if "$@"; then
+    exit 0
+  fi
+
+  echo "retry count: $i"
+  sleep 2
+done
+
+echo "retries failed for: $*"
+exit 1
