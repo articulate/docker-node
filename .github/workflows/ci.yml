@@ -1,18 +1,16 @@
-name: Build
+name: CI
 
 on:
+  pull_request:
   push:
-    branches:
+    branches-ignore:
       - main
-  schedule:
-    # Run everyday
-    - cron: '0 0 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         image:
           - 12-lambda
@@ -37,8 +35,8 @@ jobs:
       - uses: docker/build-push-action@v3
         with:
           file: ${{ matrix.image }}/Dockerfile
-          push: true
+          push: false
           tags: articulate/articulate-node:${{ matrix.image }}
           platforms: linux/amd64,linux/arm64/v8
-          cache-from: type=registry,ref=articulate/articulate-node:${{ matrix.image }}
-          cache-to: type=inline
+          cache-from: type=gha,scope=${{ github.workflow }}-${{ matrix.image }}
+          cache-to: type=gha,scope=${{ github.workflow }}-${{ matrix.image }},mode=max
