@@ -11,7 +11,7 @@ ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstra
 RUN apt-get update -qq \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            build-essential python3 imagemagick \
+            build-essential python3 imagemagick retry \
         && apt-get upgrade -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
