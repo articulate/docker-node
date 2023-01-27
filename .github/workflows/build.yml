@@ -46,6 +46,7 @@ jobs:
       - uses: docker/build-push-action@v3
         with:
           context: ${{ matrix.image }}
+          pull: ${{ github.event_name != 'pull_request' }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: articulate/articulate-node:${{ matrix.image }}
           platforms: linux/amd64,linux/arm64/v8
