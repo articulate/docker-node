@@ -6,8 +6,16 @@ on:
     branches:
       - main
   schedule:
-    # Run everyday
-    - cron: '0 0 * * *'
+    # every weekday
+    - cron: '0 0 * * 1-5'
+    # every sunday (no-cache)
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      no-cache:
+        description: 'Skip Docker cache'
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -43,3 +51,4 @@ jobs:
           platforms: linux/amd64,linux/arm64/v8
           cache-from: type=registry,ref=articulate/articulate-node:${{ matrix.image }}
           cache-to: type=inline
+          no-cache: ${{ github.event.schedule == '0 0 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.no-cache) }}
