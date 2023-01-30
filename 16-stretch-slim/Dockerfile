@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM node:16-stretch-slim
 
 ENV SERVICE_ROOT /service
@@ -5,18 +6,27 @@ ENV SERVICE_USER service
 ENV NODE_MODULES_PATH /node_modules
 ENV PATH $PATH:$NODE_MODULES_PATH/.bin
 
-ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/install.sh /tmp/consul_template_install.sh
-ADD https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/master/wait-for-it.sh /wait-for-it.sh
+ARG TARGETARCH
+ARG AWSCLI_VERSION=2.9.15
+ADD --chmod=755 https://github.com/articulate/docker-consul-template-bootstrap/releases/latest/download/docker-consul-template-bootstrap_linux_${TARGETARCH} /entrypoint
+ADD --chmod=755 https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh /wait-for-it.sh
 
 RUN apt-get update -qq \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
             build-essential python imagemagick \
+            # TODO: these packages will be removed in an upcoming release.
+            # If you want them, please copy to your Dockerfile
+            unzip sudo jq wget curl ca-certificates \
         && apt-get upgrade -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
-    && bash /tmp/consul_template_install.sh && rm /tmp/consul_template_install.sh \
-    && chmod a+rx /wait-for-it.sh \
+    && ln -s /entrypoint /entrypoint.sh \
+    # AWSCLI (to be removed in a future release)
+    && curl -s "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m)-${AWSCLI_VERSION}.zip" -o /tmp/awscliv2.zip \
+    && unzip -d /tmp /tmp/awscliv2.zip \
+    && /tmp/aws/install \
+    && rm -rf /tmp/aws /tmp/awscliv2 /tmp/awscliv2.zip \
     # Create our own user and remove the node user
     && groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER \
     && userdel -r node \
@@ -32,5 +42,5 @@ WORKDIR $SERVICE_ROOT
 
 # Our entrypoint will pull in our environment variables from Consul and Vault,
 # and execute whatever command we provided the container.
-# See https://github.com/articulate/docker-consul-template-bootstrap/blob/master/entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+# See https://github.com/articulate/docker-consul-template-bootstrap
+ENTRYPOINT [ "/entrypoint" ]
