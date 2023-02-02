@@ -1,6 +1,6 @@
 all: lambda stretch-slim buster-slim bullseye-slim
 
-lambda: 12-lambda 14-lambda 16-lambda
+lambda: 12-lambda 14-lambda 16-lambda 18-lambda
 
 stretch-slim: 12-stretch-slim 14-stretch-slim 16-stretch-slim
 
@@ -53,3 +53,7 @@ bullseye-slim: 16-bullseye-slim 18-bullseye-slim
 18-bullseye-slim:
 	docker build -t local/articulate-node:18-bullseye-slim 18-bullseye-slim
 .PHONY: 18-bullseye-slim
+
+18-lambda:
+	docker build -t local/articulate-node:18-lambda 18-lambda
+.PHONY: 18-lambda
