@@ -2,15 +2,38 @@
 
 Base Node.js image that contains common dependencies used in our organization.
 
+```dockerfile
+FROM articulate/articulate-node:<tag>
+```
+
+## Tags
+
+> 🌟 recommended image
+
+* __18-bullseye-slim__ 🌟
+* __18-lambda__ 🌟
+* __16-bullseye-slim__ 🌟
+* __16-lambda__ 🌟
+* 16-buster-slim
+* 16-stretch-slim
+* 14-buster-slim
+* 14-stretch-slim
+* 14-lambda
+* 12-buster-slim
+* 12-stretch-slim
+* 12-lambda
+
 ## Adding an image
 
 1. Create directory for image
-2. Add Dockerfile and any related policies to directory
-3. Update the Makefile: [Example](https://github.com/articulate/docker-articulate-node/pull/70/commits/3d58f80b8be0da9edcd1e38d5ffe600186199ac9#diff-76ed074a9305c04054cdebb9e9aad2d818052b07091de1f20cad0bbac34ffb52R33)
-4. Add the image to the Github Action workflow [Matrix](https://github.com/articulate/docker-articulate-node/blob/809aec98a0d99cdcb214662725a32e56b76dfb50/.github/workflows/build.yml#L16) - this will build the image and add to DockerHub.
+2. Add Dockerfile and any related policies to the directory
+3. Add a Makefile [target](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/Makefile#L53),
+  including any [categories](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/Makefile#L9).
+4. Add the image to the [build](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/.github/workflows/build.yml#L26)
+  and [lint](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/.github/workflows/lint.yml#L12)
+  workflows.
 
-
-## To test locally
+## Testing Locally
 
 1. Run `make` to build a `local/articulate-node` image locally
 2. Change the first line of your `Dockerfile` to be:
