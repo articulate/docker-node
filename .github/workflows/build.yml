@@ -38,6 +38,11 @@ jobs:
           - 18-lambda
     steps:
       - uses: actions/checkout@v3
+      - id: config
+        run: |
+          platforms="linux/amd64"
+          [ "${{ endsWith(matrix.image, '-lambda') }}" == "false" ] && platforms+=",linux/arm64"
+          echo "platforms=${platforms}" >> $GITHUB_OUTPUT
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - uses: docker/login-action@v2
@@ -50,7 +55,7 @@ jobs:
           pull: ${{ github.event_name != 'pull_request' }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: articulate/articulate-node:${{ matrix.image }}
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: ${{ steps.config.outputs.platforms }}
           cache-from: type=registry,ref=articulate/articulate-node:${{ matrix.image }}
           cache-to: type=inline
           no-cache: ${{ github.event.schedule == '0 0 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.no-cache) }}
