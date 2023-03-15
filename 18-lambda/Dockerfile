@@ -5,6 +5,7 @@ ENV AWS_DEFAULT_REGION us-east-1
 
 ARG TARGETARCH
 ADD --chmod=755 https://github.com/articulate/docker-consul-template-bootstrap/releases/latest/download/docker-consul-template-bootstrap_linux_${TARGETARCH} /entrypoint
+ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/main/scripts/docker-secrets /opt/secrets
 
 RUN yum -y install make zip \
     && yum clean all \
