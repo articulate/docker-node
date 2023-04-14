@@ -35,15 +35,6 @@ FROM articulate/articulate-node:<tag>
 
 ## Testing Locally
 
-1. Run `make` to build a `local/articulate-node` image locally
-2. Change the first line of your `Dockerfile` to be:
-
-```dockerfile
-FROM local/articulate-node
-```
-
-3. Then
-
-```shell
-docker-compose build --no-cache && docker-compose up
-```
+1. Run `make` to build a `articulate/articulate-node` image locally
+2. Run `docker compose build --no-cache`
+3. Run docker-compose as normal `docker compose up`
