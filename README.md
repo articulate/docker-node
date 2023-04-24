@@ -15,13 +15,8 @@ FROM articulate/articulate-node:<tag>
 * __16-bullseye-slim__ 🌟
 * __16-lambda__ 🌟
 * 16-buster-slim
-* 16-stretch-slim
 * 14-buster-slim
-* 14-stretch-slim
 * 14-lambda
-* 12-buster-slim
-* 12-stretch-slim
-* 12-lambda
 
 ## Adding an image
 
