@@ -3,6 +3,7 @@ FROM node:18-bullseye-slim
 
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
+ENV SERVICE_UID 1001
 ENV NODE_MODULES_PATH /node_modules
 ENV PATH $PATH:$NODE_MODULES_PATH/.bin
 
@@ -29,8 +30,8 @@ RUN apt-get update -qq \
     && /tmp/aws/install \
     && rm -rf /tmp/aws /tmp/awscliv2 /tmp/awscliv2.zip \
     # Create our own user and remove the node user
-    && groupadd --gid 1001 $SERVICE_USER \
-    && useradd --create-home --home $SERVICE_ROOT --shell /bin/bash --gid 1001 --uid 1001 $SERVICE_USER \
+    && groupadd --gid $SERVICE_UID $SERVICE_USER \
+    && useradd --create-home --home $SERVICE_ROOT --shell /bin/bash --gid $SERVICE_UID --uid $SERVICE_UID $SERVICE_USER \
     && userdel -r node \
     # Install the latest version of npm
     && npm install -g npm@latest \

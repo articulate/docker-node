@@ -4,6 +4,7 @@ FROM amazon/aws-lambda-nodejs:16
 ENV AWS_DEFAULT_REGION us-east-1
 ENV SERVICE_ROOT /service
 ENV SERVICE_USER service
+ENV SERVICE_UID 1001
 ENV SHELL bash
 
 ENV AWS_SDK_VERSION 2.585.0
@@ -27,8 +28,8 @@ RUN npm install -g npm@7 \
     && yum clean all \
     && rm -rf /var/cache/yum \
     # Add service user
-    && /usr/sbin/groupadd --gid 1001 $SERVICE_USER \
-    && /usr/sbin/useradd --create-home --home $SERVICE_ROOT --shell /bin/bash --uid 1001 --gid 1001 $SERVICE_USER \
+    && /usr/sbin/groupadd --gid $SERVICE_UID $SERVICE_USER \
+    && /usr/sbin/useradd --create-home --home $SERVICE_ROOT --shell /bin/bash --uid $SERVICE_UID --gid $SERVICE_UID $SERVICE_USER \
     && ln -s /entrypoint /entrypoint.sh \
     # AWSCLI (to be removed in a future release)
     && curl -s "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m)-${AWSCLI_VERSION}.zip" -o /tmp/awscliv2.zip \
