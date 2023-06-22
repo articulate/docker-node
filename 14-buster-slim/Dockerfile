@@ -33,7 +33,9 @@ RUN apt-get update -qq \
     # Install the latest version of npm
     && npm install -g npm@latest \
     # Create the node_modules directory, make it owned by service user
-    && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH
+    && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH \
+    # Add node-gyp globally to avoid installation issues attempting to install from a dependency
+    && yarn global add node-gyp
 
 # Add a strict security policy for Imagemagick (note: Imagemagick 7 is currently not available in Debian)
 COPY imagemagick-policy.xml /etc/ImageMagick-6/policy.xml
