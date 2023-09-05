@@ -31,6 +31,7 @@ jobs:
           - 16-bullseye-slim
           - 18-bullseye-slim
           - 18-lambda
+          - 20-bullseye-slim
     steps:
       - uses: actions/checkout@v3
       - uses: docker/setup-qemu-action@v2

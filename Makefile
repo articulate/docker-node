@@ -30,3 +30,7 @@ help:
 18-lambda: ## Build articulate/articulate-node:18-lambda
 	docker build -t articulate/articulate-node:18-lambda 18-lambda
 .PHONY: 18-lambda
+
+20-bullseye-slim: ## Build articulate/articulate-node:20-bullseye-slim
+	docker build -t articulate/articulate-node:20-bullseye-slim 20-bullseye-slim
+.PHONY: 20-bullseye-slim

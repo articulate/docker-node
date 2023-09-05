@@ -10,10 +10,11 @@ FROM articulate/articulate-node:<tag>
 
 > 🌟 recommended image
 
+* __20-bullseye-slim__ 🌟
 * __18-bullseye-slim__ 🌟
 * __18-lambda__ 🌟
-* __16-bullseye-slim__ 🌟
-* __16-lambda__ 🌟
+* 16-bullseye-slim
+* 16-lambda
 * 16-buster-slim
 * 14-buster-slim
 * 14-lambda
