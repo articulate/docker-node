@@ -1,25 +1,27 @@
 name: Lint
 
-on:
-  pull_request:
+on: pull_request
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Find Dockerfiles
+        id: scan
+        run: echo "dockerfiles=$(find . -name Dockerfile | cut -c3- | jq -R -s -c 'split("\n")[:-1]')" >> "$GITHUB_OUTPUT"
+    outputs:
+      dockerfiles: ${{ steps.scan.outputs.dockerfiles }}
   lint:
     runs-on: ubuntu-latest
+    needs: [setup]
     strategy:
       fail-fast: false
       matrix:
-        image:
-          - 14-lambda
-          - 14-buster-slim
-          - 16-lambda
-          - 16-buster-slim
-          - 16-bullseye-slim
-          - 18-bullseye-slim
-          - 18-lambda
+        dockerfile: ${{ fromJSON(needs.setup.outputs.dockerfiles) }}
     steps:
       - uses: actions/checkout@v3
       - uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # pin@v3.1.0
         with:
-          dockerfile: ${{ matrix.image }}/Dockerfile
+          dockerfile: ${{ matrix.dockerfile }}
           ignore: DL3008,DL3016,DL3033

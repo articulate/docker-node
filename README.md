@@ -1,35 +1,46 @@
-# Articulate Node Images
+# Docker Node Images
 
-Base Node.js image that contains common dependencies used in our organization.
+Base Node.js Docker images.
 
-```dockerfile
-FROM articulate/articulate-node:<tag>
-```
+## What's Included
+
+* [docker-bootstrap](https://github.com/articulate/docker-bootstrap) entrypoint
+  for loading environment variables from Consul and Vault.
+* [secrets](https://github.com/articulate/docker-bootstrap/blob/main/scripts/docker-secrets)
+  to load Docker secrets as environment variables.
+* [install_packages](https://github.com/articulate/docker-bootstrap/blob/main/scripts/install_packages)
+  to install apt packages.
+* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+  for interacting with AWS services.
+* `build-essential` for building some Node packages.
 
 ## Tags
 
 > 🌟 recommended image
 
-* __18-bullseye-slim__ 🌟
-* __18-lambda__ 🌟
-* __16-bullseye-slim__ 🌟
-* __16-lambda__ 🌟
-* 16-buster-slim
-* 14-buster-slim
-* 14-lambda
+* __articulate/node:18__ 🌟
+* articulate/node:18-lambda
+* articulate/articulate-node:18-bullseye-slim
+* articulate/articulate-node:18-lambda
+* articulate/articulate-node:16-bullseye-slim
+* articulate/articulate-node:16-lambda
+* articulate/articulate-node:16-buster-slim
+* articulate/articulate-node:14-buster-slim
+* articulate/articulate-node:14-lambda
 
-## Adding an image
+### articulate/node vs articulate/articulate-node
 
-1. Create directory for image
-2. Add Dockerfile and any related policies to the directory
-3. Add a Makefile [target](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/Makefile#L53),
-  including any [categories](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/Makefile#L9).
-4. Add the image to the [build](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/.github/workflows/build.yml#L26)
-  and [lint](https://github.com/articulate/docker-articulate-node/blob/02fe1df76dddcc5f6482e954cf3ff0ca814ab4ab/.github/workflows/lint.yml#L12)
-  workflows.
+`articulate/articulate-node` are the legacy Docker images. These run as root and
+include additional software not always needed. Use `articulate/node` where possible
+and install your own software with `install_packages`.
 
-## Testing Locally
+## Creating a new image
 
-1. Run `make` to build a `articulate/articulate-node` image locally
-2. Run `docker compose build --no-cache`
-3. Run docker-compose as normal `docker compose up`
+The easiest way to create a new image is to copy an existing one and change the
+base image. If creating from scratch, the images need the following:
+
+* Everything listed in [What's included](#whats-included)
+* `make` for internal tooling.
+* A _service_ user and group with a GID and UID of 1001. This should be the default
+  user.
+* A _/service_ directory as the default working directory.

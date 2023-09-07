@@ -1,3 +1,4 @@
+# tags=articulate/articulate-node:14-buster-slim
 # syntax=docker/dockerfile:1
 FROM node:14-buster-slim
 
@@ -8,15 +9,13 @@ ENV PATH $PATH:$NODE_MODULES_PATH/.bin
 
 ARG TARGETARCH
 ARG AWSCLI_VERSION=2.11.15
-ADD --chmod=755 https://github.com/articulate/docker-consul-template-bootstrap/releases/latest/download/docker-consul-template-bootstrap_linux_${TARGETARCH} /entrypoint
+ADD --chmod=755 https://github.com/articulate/docker-bootstrap/releases/latest/download/docker-bootstrap_linux_${TARGETARCH} /entrypoint
 ADD --chmod=755 https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh /wait-for-it.sh
 
 RUN apt-get update -qq \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
             build-essential python3 imagemagick \
-            # TODO: these packages will be removed in an upcoming release.
-            # If you want them, please copy to your Dockerfile
             unzip sudo jq wget curl ca-certificates \
         && apt-get upgrade -y \
         && apt-get clean \
@@ -30,8 +29,8 @@ RUN apt-get update -qq \
     # Create our own user and remove the node user
     && groupadd $SERVICE_USER && useradd --create-home --home $SERVICE_ROOT --gid $SERVICE_USER --shell /bin/bash $SERVICE_USER \
     && userdel -r node \
-    # Install the latest version of npm
-    && npm install -g npm@latest \
+    # Install a newer version of npm
+    && npm install -g npm@9 \
     # Create the node_modules directory, make it owned by service user
     && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH \
     # Add node-gyp globally to avoid installation issues attempting to install from a dependency
