@@ -12,12 +12,12 @@ Base Node.js Docker images.
   to install apt packages.
 * [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   for interacting with AWS services.
-* `build-essential` for building some Node packages.
 
 ## Tags
 
 > 🌟 recommended image
 
+* articulate/node:20
 * __articulate/node:18__ 🌟
 * articulate/node:18-lambda
 * articulate/articulate-node:18-bullseye-slim
