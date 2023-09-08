@@ -10,6 +10,7 @@ ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-bootstrap/ma
 
 RUN yum -y install make zip \
     && yum clean all \
-    && rm -rf /var/cache/yum
+    && rm -rf /var/cache/yum \
+    && npm install --global yarn@1.22.19
 
 ENTRYPOINT [ "/entrypoint" ]
