@@ -19,8 +19,8 @@ RUN yum -y install make zip shadow-utils \
     # Install yarn
     && npm install --global yarn@1.22.19
 
-ADD --chmod=755 https://github.com/articulate/docker-consul-template-bootstrap/releases/latest/download/docker-consul-template-bootstrap_linux_${TARGETARCH} /entrypoint
-ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-consul-template-bootstrap/main/scripts/docker-secrets /usr/local/bin/secrets
+ADD --chmod=755 https://github.com/articulate/docker-bootstrap/releases/latest/download/docker-bootstrap_linux_${TARGETARCH} /entrypoint
+ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-bootstrap/main/scripts/docker-secrets /usr/local/bin/secrets
 
 USER $SERVICE_USER
 WORKDIR $SERVICE_ROOT
