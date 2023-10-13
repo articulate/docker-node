@@ -6,10 +6,8 @@ on:
     branches:
       - main
   schedule:
-    # every weekday
-    - cron: '0 0 * * 1-5'
-    # every sunday (no-cache)
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 1-6'
+    - cron: '0 0 * * 0' # runs with no-cache
   workflow_dispatch:
     inputs:
       no-cache:
@@ -29,7 +27,7 @@ jobs:
       dockerfiles: ${{ steps.scan.outputs.dockerfiles }}
   build:
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: setup
     strategy:
       fail-fast: false
       matrix:
@@ -59,3 +57,9 @@ jobs:
           cache-from: type=registry,ref=${{ steps.meta.outputs.cache }}
           cache-to: type=inline
           no-cache: ${{ github.event.schedule == '0 0 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.no-cache) }}
+  notify:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name != 'pull_request'
+    steps:
+      - run: curl ${{ secrets.DMS_URL }}
