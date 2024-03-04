@@ -57,6 +57,18 @@ jobs:
           cache-from: type=registry,ref=${{ steps.meta.outputs.cache }}
           cache-to: type=inline
           no-cache: ${{ github.event.schedule == '0 0 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.no-cache) }}
+  dockerhub:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peter-evans/dockerhub-description@e98e4d1628a5f3be2be7c231e50981aee98723ae # pin@v4
+        with:
+          repository: articulate/node
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          short-description: ${{ github.event.repository.description }}
   notify:
     runs-on: ubuntu-latest
     needs: build
