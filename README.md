@@ -27,6 +27,10 @@ Base Node.js Docker images.
 * articulate/articulate-node:16-lambda
 * articulate/articulate-node:16-buster-slim
 
+DEPRECATED - use recommend image instead otherwise necessary
+
+* articulate/node:20.11-temporary
+
 ### articulate/node vs articulate/articulate-node
 
 `articulate/articulate-node` are the legacy Docker images. These run as root and
