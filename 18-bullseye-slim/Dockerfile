@@ -18,7 +18,7 @@ RUN apt-get update -qq \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
             build-essential python3 imagemagick retry \
-            unzip sudo jq wget curl ca-certificates \
+            unzip sudo jq wget curl ca-certificates dumb-init \
         && apt-get upgrade -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
@@ -47,4 +47,4 @@ WORKDIR $SERVICE_ROOT
 # Our entrypoint will pull in our environment variables from Consul and Vault,
 # and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-bootstrap
-ENTRYPOINT [ "/entrypoint" ]
+ENTRYPOINT [ "dumb-init", "--", "/entrypoint" ]
