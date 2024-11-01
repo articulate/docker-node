@@ -17,6 +17,7 @@ Base Node.js Docker images.
 
 > 🌟 recommended image
 
+* __articulate/node:22__ 🌟
 * __articulate/node:20__ 🌟
 * articulate/node:20-lambda
 * articulate/node:18
@@ -27,8 +28,8 @@ Base Node.js Docker images.
 ### articulate/node vs articulate/articulate-node
 
 `articulate/articulate-node` are the legacy Docker images. Those ran as root and
-include additional software not always needed. Use `articulate/node` where possible
-and install your own software with `install_packages`.
+include software not always needed. Use `articulate/node` where possible and
+install your own software with `install_packages`.
 
 ## Creating a new image
 
