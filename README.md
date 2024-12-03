@@ -18,6 +18,7 @@ Base Node.js Docker images.
 > 🌟 recommended image
 
 * __articulate/node:22__ 🌟
+* articulate/node:22-lambda
 * __articulate/node:20__ 🌟
 * articulate/node:20-lambda
 * articulate/node:18
