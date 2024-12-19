@@ -2,9 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM node:18-bullseye-slim
 
-ENV SERVICE_ROOT /service
-ENV SERVICE_USER service
-ENV SERVICE_UID 1001
+ENV SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001
 
 ARG TARGETARCH
 

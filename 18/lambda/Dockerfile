@@ -2,10 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM amazon/aws-lambda-nodejs:18
 
-ENV AWS_DEFAULT_REGION us-east-1
-ENV SERVICE_ROOT /service
-ENV SERVICE_USER service
-ENV SERVICE_UID 1001
+ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001
 
 ARG TARGETARCH
 
