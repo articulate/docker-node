@@ -33,7 +33,7 @@ RUN apt-get update -qq \
     && useradd --create-home --home $SERVICE_ROOT --shell /bin/bash --gid $SERVICE_UID --uid $SERVICE_UID $SERVICE_USER \
     && userdel -r node \
     # Install the latest version of npm
-    && npm install -g npm@latest \
+    && npm install -g npm@10 \
     # Create the node_modules directory, make it owned by service user
     && mkdir -p $NODE_MODULES_PATH && chown $SERVICE_USER:$SERVICE_USER $NODE_MODULES_PATH \
     # Add node-gyp globally to avoid installation issues attempting to install from a dependency

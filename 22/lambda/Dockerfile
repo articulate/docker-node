@@ -2,10 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM amazon/aws-lambda-nodejs:22
 
-ENV AWS_DEFAULT_REGION us-east-1
-ENV SERVICE_ROOT /service
-ENV SERVICE_USER service
-ENV SERVICE_UID 1001
+ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001
 
 ARG TARGETARCH
 
@@ -30,4 +27,3 @@ WORKDIR $SERVICE_ROOT
 # and execute whatever command we provided the container.
 # See https://github.com/articulate/docker-bootstrap
 ENTRYPOINT [ "/entrypoint" ]
-
