@@ -14,10 +14,13 @@ ADD --chmod=755 https://github.com/articulate/docker-bootstrap/releases/latest/d
 ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-bootstrap/main/scripts/docker-secrets /usr/local/bin/secrets
 ADD --chmod=755 https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh /wait-for-it.sh
 
-RUN apt-get update -qq \
-        && apt-get upgrade -y \
+# libc-bin had some cached files that started causing a segfault in the apt-get update
+# Source: https://stackoverflow.com/a/78107622
+RUN rm -f /var/lib/dpkg/info/libc-bin.* \
+        && apt-get clean \
+        && apt-get update -qq \
         && apt-get install -y --no-install-recommends \
-            build-essential python3 imagemagick retry \
+            libc-bin build-essential python3 imagemagick retry \
             unzip sudo jq wget curl ca-certificates dumb-init \
         && apt-get upgrade -y \
         && apt-get clean \
