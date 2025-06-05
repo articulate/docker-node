@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM amazon/aws-lambda-nodejs:22
 
-ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001
+ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001 COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 ARG TARGETARCH
 
@@ -10,8 +10,8 @@ RUN dnf -y install make zip shadow-utils \
     # Add service user
     && /usr/sbin/groupadd --gid $SERVICE_UID $SERVICE_USER \
     && /usr/sbin/useradd --create-home --shell /bin/bash --uid $SERVICE_UID --gid $SERVICE_UID $SERVICE_USER \
-    # Install yarn
-    && npm install --global yarn@1.22.19 \
+    && npm install --global corepack@0.33.0 \
+    && corepack enable \
     # clean up
     && dnf -y remove shadow-utils \
     && dnf clean all \
