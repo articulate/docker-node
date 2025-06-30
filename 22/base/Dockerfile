@@ -13,7 +13,10 @@ RUN install_packages make dumb-init && /tmp/awscli.sh && rm /tmp/awscli.sh \
     # Create our own user and remove the node user
     && groupadd --gid $SERVICE_UID $SERVICE_USER \
     && useradd --create-home --shell /bin/bash --gid $SERVICE_UID --uid $SERVICE_UID $SERVICE_USER \
-    && userdel -r node
+    && userdel -r node \
+    # Enable Corepack
+    && npm install --global corepack@0.33.0 \
+    && corepack enable
 
 ADD --chmod=755 https://github.com/articulate/docker-bootstrap/releases/latest/download/docker-bootstrap_linux_${TARGETARCH} /entrypoint
 ADD --chmod=755 https://raw.githubusercontent.com/articulate/docker-bootstrap/main/scripts/docker-secrets /usr/local/bin/secrets

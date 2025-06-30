@@ -10,6 +10,7 @@ RUN dnf -y install make zip shadow-utils \
     # Add service user
     && /usr/sbin/groupadd --gid $SERVICE_UID $SERVICE_USER \
     && /usr/sbin/useradd --create-home --shell /bin/bash --uid $SERVICE_UID --gid $SERVICE_UID $SERVICE_USER \
+    # Enable Corepack
     && npm install --global corepack@0.33.0 \
     && corepack enable \
     # clean up
