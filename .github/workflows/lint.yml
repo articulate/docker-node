@@ -6,7 +6,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Find Dockerfiles
         id: scan
         run: echo "dockerfiles=$(find . -name Dockerfile | cut -c3- | jq -R -s -c 'split("\n")[:-1]')" >> "$GITHUB_OUTPUT"
@@ -20,7 +20,7 @@ jobs:
       matrix:
         dockerfile: ${{ fromJSON(needs.setup.outputs.dockerfiles) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # pin@v3.1.0
         with:
           dockerfile: ${{ matrix.dockerfile }}
