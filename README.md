@@ -22,10 +22,6 @@ Base Node.js Docker images.
 * articulate/node:22-lambda
 * __articulate/node:20__
 * articulate/node:20-lambda
-* articulate/node:18
-* articulate/node:18-lambda
-* articulate/articulate-node:18-bullseye-slim
-* articulate/articulate-node:18-lambda
 
 ### articulate/node vs articulate/articulate-node
 
