@@ -12,6 +12,8 @@ Base Node.js Docker images.
   to install apt packages.
 * [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   for interacting with AWS services.
+* [AWS RDS CA Certificates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+  to enable trusted TLS connections with AWS RDS instances _(in any region)_.
 
 ## Tags
 
