@@ -17,7 +17,7 @@ RUN install_packages make dumb-init ca-certificates && /tmp/awscli.sh && rm /tmp
     && useradd --create-home --shell /bin/bash --gid $SERVICE_UID --uid $SERVICE_UID $SERVICE_USER \
     && userdel -r node \
     # Enable Corepack
-    && npm install --global corepack@0.33.0 \
+    && npm install --global corepack@0.34.6 \
     && corepack enable \
     # Split PEM bundle into individual cert files for update-ca-certificates
     && csplit -s -z -n 3 -f /usr/local/share/ca-certificates/aws-rds-ca- \
