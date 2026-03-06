@@ -1,6 +1,6 @@
 # tags=articulate/node:24-lambda
 # syntax=docker/dockerfile:1
-FROM amazon/aws-lambda-nodejs:24
+FROM public.ecr.aws/lambda/nodejs:24
 
 ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001 COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
