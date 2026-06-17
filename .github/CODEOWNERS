@@ -1,1 +1,4 @@
 * @articulate/devex
+
+# Allow Botzo to approve dependency bumps (and related updates)
+/.github/workflows/ @articulate/devex @botzo

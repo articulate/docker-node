@@ -2,22 +2,23 @@ name: Build
 
 on:
   pull_request:
+  merge_group:
   push:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * 1-6'
-    - cron: '0 0 * * 0' # runs with no-cache
+    - cron: "0 0 * * 1-6"
+    - cron: "0 0 * * 0" # runs with no-cache
   workflow_dispatch:
     inputs:
       no-cache:
-        description: 'Skip Docker cache'
+        description: "Skip Docker cache"
         type: boolean
         default: false
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v6
       - name: Find Dockerfiles
@@ -50,17 +51,25 @@ jobs:
       - uses: docker/build-push-action@v7
         with:
           context: ${{ steps.meta.outputs.context }}
-          pull: ${{ github.event_name != 'pull_request' }}
-          push: ${{ github.event_name != 'pull_request' }}
+          pull: ${{ github.event_name != 'pull_request' && github.event_name != 'merge_group' }}
+          push: ${{ github.event_name != 'pull_request' && github.event_name != 'merge_group' }}
           tags: ${{ steps.meta.outputs.tags }}
           platforms: linux/amd64,linux/arm64/v8
           cache-from: type=registry,ref=${{ steps.meta.outputs.cache }}
           cache-to: type=inline
           no-cache: ${{ github.event.schedule == '0 0 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.no-cache) }}
+  build-complete:
+    if: always()
+    runs-on: ubuntu-slim
+    needs: [build]
+    steps:
+      - name: Verify build succeeded
+        run: |
+          [ "${{ needs.build.result }}" = "success" ] || exit 1
   dockerhub:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.event_name != 'merge_group'
     steps:
       - uses: actions/checkout@v6
       - uses: peter-evans/dockerhub-description@1b9a80c056b620d92cedb9d9b5a223409c68ddfa # pin@v4
@@ -70,8 +79,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           short-description: ${{ github.event.repository.description }}
   notify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.event_name != 'merge_group'
     steps:
       - run: curl ${{ secrets.DMS_URL }}
