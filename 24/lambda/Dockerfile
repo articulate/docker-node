@@ -1,6 +1,9 @@
 # tags=articulate/node:24-lambda
 # syntax=docker/dockerfile:1
-FROM public.ecr.aws/lambda/nodejs:24
+# Pinned to the 2026-05-05 Lambda Node 24 build; Node 24.17.0 broke node-fetch@2 keep-alive
+# (ERR_STREAM_PREMATURE_CLOSE). Unpin once AWS rebuilds on 24.17.1+/24.18.0.
+# See https://github.com/nodejs/node/issues/63989
+FROM public.ecr.aws/lambda/nodejs:24.2026.05.05.20
 
 ENV AWS_DEFAULT_REGION=us-east-1 SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001 COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
