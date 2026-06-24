@@ -26,24 +26,6 @@ Base Node.js Docker images.
 * __articulate/node:20__
 * articulate/node:20-lambda
 
-### Upstream Node pin (June 23 2026)
-
-Node 22 and 24 base images are temporarily pinned to pre-regression versions:
-
-* `node:22` → `node:22.22-bookworm-slim`
-* `node:22-lambda` → `amazon/aws-lambda-nodejs:22.2026.05.05.20-x86_64`
-* `node:24` → `node:24.16-bookworm-slim`
-* `node:24-lambda` → `public.ecr.aws/lambda/nodejs:24.2026.05.05.20`
-
-Node 22.23.0 and 24.17.0 (2026-06-18 security release for CVE-2026-48931)
-regressed `http.Agent` keep-alive handling, breaking `node-fetch@2` (and the
-entire `gaxios` → `googleapis` / `@google-cloud` / `firebase-tools` stack) with
-`ERR_STREAM_PREMATURE_CLOSE` under load. Unpin once 22.23.1+/22.24.0 and
-24.17.1+/24.18.0 ship.
-
-* Issue: <https://github.com/nodejs/node/issues/63989>
-* Fix PR: <https://github.com/nodejs/node/pull/64004>
-
 ### articulate/node vs articulate/articulate-node
 
 `articulate/articulate-node` are the legacy Docker images. Those ran as root and

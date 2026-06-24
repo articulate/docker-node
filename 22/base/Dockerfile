@@ -1,8 +1,6 @@
 # tags=articulate/node:22
 # syntax=docker/dockerfile:1
-# Pinned to 22.22.x; Node 22.23.0 broke node-fetch@2 keep-alive (ERR_STREAM_PREMATURE_CLOSE).
-# Unpin once 22.23.1+/22.24.0 ships. See https://github.com/nodejs/node/issues/63989
-FROM node:22.22-bookworm-slim
+FROM node:22-bookworm-slim
 
 ENV SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001 NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/aws-rds-global-bundle.pem
 
