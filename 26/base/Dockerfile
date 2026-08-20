@@ -1,6 +1,6 @@
 # tags=articulate/node:26
 # syntax=docker/dockerfile:1
-FROM node:26-bookworm-slim
+FROM node:26-trixie-slim
 
 ENV SERVICE_ROOT=/service SERVICE_USER=service SERVICE_UID=1001 NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/aws-rds-global-bundle.pem
 
