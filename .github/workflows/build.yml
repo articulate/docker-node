@@ -78,9 +78,3 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           short-description: ${{ github.event.repository.description }}
-  notify:
-    runs-on: ubuntu-slim
-    needs: build
-    if: github.event_name != 'pull_request' && github.event_name != 'merge_group'
-    steps:
-      - run: curl ${{ secrets.DMS_URL }}
