@@ -19,10 +19,13 @@ Base Node.js Docker images.
 
 > 🌟 recommended image
 
-* __articulate/node:26__ _(preview; not LTS)_
-* __articulate/node:24__ 🌟
-* articulate/node:24-lambda
-* __articulate/node:22__ 🌟
+Use `articulate/node:26` for new and upgraded services. For AWS Lambda, use
+`articulate/node:24-lambda`. There is no Node 26 Lambda image yet.
+
+* __articulate/node:26__ 🌟
+* __articulate/node:24__
+* articulate/node:24-lambda 🌟
+* __articulate/node:22__
 * articulate/node:22-lambda
 * __articulate/node:20__
 * articulate/node:20-lambda
